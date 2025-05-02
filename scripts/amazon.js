@@ -5,7 +5,7 @@
  * 3. make it interactive
  */
 
-import { cart } from "../data/cart.js";
+import { cart, addToCart } from "../data/cart.js";
 import { products } from "../data/products.js";
 
 let htmls = "";
@@ -56,25 +56,6 @@ products.forEach((product) => {
 
 // generate the html
 document.querySelector(".js-products-grid").innerHTML = htmls;
-
-function addToCart(productId) {
-    let matchingItem;
-
-    cart.forEach((cartItem) => {
-        if (productId === cartItem.productId) {
-            matchingItem = cartItem;
-        }
-    });
-
-    if (matchingItem) {
-        matchingItem.quantity += 1;
-    } else {
-        cart.push({
-            productId: productId,
-            quantity: 1,
-        });
-    }
-}
 
 function updateToCart() {
     let addedTotal = 0;

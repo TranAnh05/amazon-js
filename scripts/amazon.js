@@ -1,8 +1,8 @@
 /**
  * == steps ==
  * 1. save the data -> done
- * 2. generate the htmls
- * 3. interactive
+ * 2. generate the html -> done
+ * 3. make it interactive
  */
 
 let htmls = "";
@@ -45,9 +45,42 @@ products.forEach((product) => {
                 Added
             </div>
 
-            <button class="add-to-cart-button button-primary">Add to Cart</button>
+            <button class="add-to-cart-button button-primary js-add-to-card" 
+                data-product-id="${product.id}">Add to Cart</button>
         </div>
     `;
 });
 
+// generate the html
 document.querySelector(".js-products-grid").innerHTML = htmls;
+
+// make it interactive
+document.querySelectorAll(".js-add-to-card").forEach((button) => {
+    button.addEventListener("click", () => {
+        const productId = button.dataset.productId;
+        let matchingItem;
+
+        cart.forEach((item) => {
+            if (productId === item.productId) {
+                matchingItem = item;
+            }
+        });
+
+        if (matchingItem) {
+            matchingItem.quantity += 1;
+        } else {
+            cart.push({
+                productId: productId,
+                quantity: 1,
+            });
+        }
+
+        // update quatity of cart
+        let addedTotal = 0;
+        cart.forEach((item) => {
+            addedTotal += item.quantity;
+        });
+
+        document.querySelector(".js-cart-quantity").innerText = addedTotal;
+    });
+});

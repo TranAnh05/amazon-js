@@ -1,10 +1,3 @@
-/**
- * == steps ==
- * 1. save the data -> done
- * 2. generate the html -> done
- * 3. make it interactive
- */
-
 import { cart, addToCart } from "../data/cart.js";
 import { products } from "../data/products.js";
 import { formatCurrency } from "./utils/money.js";
@@ -66,6 +59,8 @@ function updateToCart() {
 
     document.querySelector(".js-cart-quantity").innerText = addedTotal;
 }
+
+updateToCart();
 
 // make it interactive
 document.querySelectorAll(".js-add-to-card").forEach((button) => {

@@ -19,6 +19,10 @@ function saveToStorage() {
     localStorage.setItem("cart", JSON.stringify(cart));
 }
 
+export function getQuantity() {
+    return cart.reduce((a, b) => a + b.quantity, 0);
+}
+
 export function addToCart(productId) {
     let matchingItem;
 

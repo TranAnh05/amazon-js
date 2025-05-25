@@ -5,15 +5,22 @@ import "../data/cart-class.js";
 import { loadCart } from "../data/cart.js";
 
 async function loadPage() {
-    await loadProductsFetch();
-    await new Promise((resolve) => {
-        loadCart(() => {
-            resolve();
+    try {
+        // throw 'error1';
+        await loadProductsFetch();
+        await new Promise((resolve, reject) => {
+            // throw 'error 2'
+            loadCart(() => {
+                // reject();
+                resolve();
+            });
         });
-    });
 
-    renderOrderSummary();
-    renderPaymentSummary();
+        renderOrderSummary();
+        renderPaymentSummary();
+    } catch (error) {
+        console.log("Unexpected error. Please try again later.");
+    }
 }
 
 loadPage();
